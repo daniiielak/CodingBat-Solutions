@@ -41,6 +41,122 @@
     return nums[0] + nums[1] + nums[2];
   }
 
+  // rotateLeft3 -> Given an array of ints length 3, return an array with the elements "rotated left" so {1, 2, 3} yields {2, 3, 1}.
+  // eg. 1. rotateLeft3([1, 2, 3]) → [2, 3, 1] || 2. rotateLeft3([5, 11, 9]) → [11, 9, 5] || 3. rotateLeft3([7, 0, 0]) → [0, 0, 7]
+  public int[] rotateLeft3(int[] nums) { // solution for an array with potential larger size
+    int[] newArray = new int[nums.length];
+    for (int i = 1; i<nums.length; i++){
+      newArray[i-1] = nums[i];
+    }
+    newArray[(nums.length)-1] = nums[0];
+    return newArray;
+  }
 
-   // DNC - class closing tag
- }
+  public int[] rotateLeft3(int[] nums) { // solution for 3 nums in array only
+    return new int[] {nums[1], nums[2], nums[0]};
+  }
+
+  //  reverse3 -> Given an array of ints length 3, return a new array with the elements in reverse order, so {1, 2, 3} becomes {3, 2, 1}.
+  // eg. 1. reverse3([1, 2, 3]) → [3, 2, 1] || 2. reverse3([5, 11, 9]) → [9, 11, 5] || reverse3([7, 0, 0]) → [0, 0, 7]
+  public int[] reverse3(int[] nums) { // solution for an array with potential larger size
+  int[] newArray = new int[nums.length];
+  int base = 0;
+  for (int i = nums.length-1; i >= 0; i--){
+    newArray[base] = nums[i];
+    base++;
+  }
+  return newArray;
+}
+
+  public int[] reverse3(int[] nums) {
+    return new int[] {nums[2], nums[1], nums[0]};
+  }
+
+  // maxEnd3 -> Given an array of ints length 3, figure out which is larger, the first or last element in the array, and set all the other elements to be that value. Return the changed array.
+  // eg. 1. maxEnd3([1, 2, 3]) → [3, 3, 3] || 2. maxEnd3([11, 5, 9]) → [11, 11, 11] || 3. maxEnd3([2, 11, 3]) → [3, 3, 3]
+  public int[] maxEnd3(int[] nums) {
+    if(nums[0]>nums[nums.length-1]){
+      return new int[]{nums[0], nums[0], nums[0]};
+    }
+    return new int[]{nums[nums.length-1], nums[nums.length-1], nums[nums.length-1]};
+  }
+
+  // sum2 -> Given an array of ints, return the sum of the first 2 elements in the array. If the array length is less than 2, just sum up the elements that exist, returning 0 if the array is length 0.
+  // eg. 1. sum2([1, 2, 3]) → 3 || 2. sum2([1, 1]) → 2 || 3. sum2([1, 1, 1, 1]) → 2
+  public int sum2(int[] nums) {
+    if (nums.length>=2){
+      return nums[0] + nums[1];
+    }
+    else if (nums.length==1){
+      return nums[0];
+    }
+    return 0;
+  }
+
+  // middleWay -> Given 2 int arrays, a and b, each length 3, return a new array length 2 containing their middle elements.
+  // eg. 1. middleWay([1, 2, 3], [4, 5, 6]) → [2, 5] || 2. middleWay([7, 7, 7], [3, 8, 0]) → [7, 8] || 3. middleWay([5, 2, 9], [1, 4, 5]) → [2, 4]
+  public int[] middleWay(int[] a, int[] b) {
+    return new int[]{a[1], b[1]};
+  }
+
+  // makeEnds -> Given an array of ints, return a new array length 2 containing the first and last elements from the original array. The original array will be length 1 or more.
+  // eg. 1. makeEnds([1, 2, 3]) → [1, 3] || 2. makeEnds([1, 2, 3, 4]) → [1, 4] || 3. makeEnds([7, 4, 6, 2]) → [7, 2]
+  public int[] makeEnds(int[] nums) {
+    return new int[]{nums[0], nums[nums.length-1]};
+  }
+
+  // has23 -> Given an int array length 2, return true if it contains a 2 or a 3.
+  // eg. 1. has23([2, 5]) → true || 2. has23([4, 3]) → true || 3. has23([4, 5]) → false
+  public boolean has23(int[] nums) {
+    return (nums[0]==2 || nums[0]==3 || nums[1]==2 || nums[1]==3);
+  }
+
+  public boolean has23(int[] nums) {
+    for (int i = 0; i < nums.length; i++){
+      if (nums[i]==2 || nums[i]==3){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // no23 -> Given an int array length 2, return true if it does not contain a 2 or 3.
+  // eg. 1. no23([4, 5]) → true || 2. no23([4, 2]) → false || 3.- no23([3, 5]) → false
+  public boolean no23(int[] nums) {
+    return (nums[0]!=2 && nums[0]!= 3 && nums[1]!=2 && nums[1]!= 3);
+  }
+
+  public boolean no23(int[] nums) {
+    for(int i=0; i<nums.length; i++){
+      if(nums[i]==2 || nums[i]==3){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // makeLast -> Given an int array, return a new array with double the length where its last element is the same as the original array, and all the other elements are 0. The original array will be length 1 or more. Note: by default, a new int array contains all 0's.
+  // eg. 1. makeLast([4, 5, 6]) → [0, 0, 0, 0, 0, 6] || 2. makeLast([1, 2]) → [0, 0, 0, 2] || 3. makeLast([3]) → [0, 3]
+  public int[] makeLast(int[] nums) {
+    int[] newArray = new int[nums.length * 2];
+    newArray[newArray.length-1] = nums[nums.length-1];
+    return newArray;
+  }
+
+  // double23 -> Given an int array, return true if the array contains 2 twice, or 3 twice. The array will be length 0, 1, or 2.
+  // eg. 1. double23([2, 2]) → true || 2. double23([3, 3]) → true || 3. double23([2, 3]) → false
+  public boolean double23(int[] nums) {
+    int count2 = 0;
+    int count3 = 0;
+    for (int i = 0; i<nums.length; i++){
+      if(nums[i]==2){
+        count2++;
+        }
+      else if(nums[i]==3){
+        count3++;
+      }
+    }
+    return (count2>=2 || count3>=2);
+  }
+
+} // class closing
