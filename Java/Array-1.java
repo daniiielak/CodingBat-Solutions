@@ -210,4 +210,107 @@
       return new int[] {nums[half], nums[half+1]};
   }
 
+  //plusTwo -> Given 2 int arrays, each length 2, return a new array length 4 containing all their elements.
+  // eg 1. plusTwo([1, 2], [3, 4]) → [1, 2, 3, 4] || 2. plusTwo([4, 4], [2, 2]) → [4, 4, 2, 2] || 3. plusTwo([9, 2], [3, 4]) → [9, 2, 3, 4]
+  public int[] plusTwo(int[] a, int[] b) {
+    return new int[] {a[0], a[1], b[0], b[1]};
+  }
+
+  public int[] plusTwo(int[] a, int[] b) {
+    int[] newArray = new int[a.length+b.length];
+    int count = 0;
+    for(int i = 0; i<a.length; i++){
+      newArray[count] = a[i];
+      count++;
+    }
+    for (int j = 0; j<b.length; j++){
+      newArray[count] = b[j];
+      count++;
+    }
+    return newArray;
+  }
+
+  // swapEnds -> Given an array of ints, swap the first and last elements in the array. Return the modified array. The array length will be at least 1.
+  // eg. 1. swapEnds([1, 2, 3, 4]) → [4, 2, 3, 1] || 2. swapEnds([1, 2, 3]) → [3, 2, 1] || 3. swapEnds([8, 6, 7, 9, 5]) → [5, 6, 7, 9, 8]
+  public int[] swapEnds(int[] nums) {
+    int first = nums[0];
+    nums[0] = nums[nums.length-1];
+    nums[nums.length-1] = first;
+    return nums;
+  }
+
+  // midThree -> Given an array of ints of odd length, return a new array length 3 containing the elements from the middle of the array. The array length will be at least 3.
+  // eg. 1. midThree([1, 2, 3, 4, 5]) → [2, 3, 4] || 2. midThree([8, 6, 7, 5, 3, 0, 9]) → [7, 5, 3] || 3. midThree([1, 2, 3]) → [1, 2, 3]
+  public int[] midThree(int[] nums) {
+    int half = nums.length/2;
+    return new int[]{nums[half-1], nums[half], nums[half+1]};
+  }
+
+  // maxTriple -> Given an array of ints of odd length, look at the first, last, and middle values in the array and return the largest. The array length will be a least 1.
+  // eg. 1. maxTriple([1, 2, 3]) → 3 || 2. maxTriple([1, 5, 3]) → 5 || 3. maxTriple([5, 2, 3]) → 5
+  public int maxTriple(int[] nums) {
+    if(nums[0]>nums[nums.length/2] && nums[0]>nums[nums.length-1]){
+      return nums[0];
+    }
+    else if(nums[nums.length-1]>nums[nums.length/2] && nums[nums.length-1]>nums[0]){
+      return nums[nums.length-1];
+    }
+    return nums[nums.length/2];
+  }
+
+  // frontPiece -> Given an int array of any length, return a new array of its first 2 elements. If the array is smaller than length 2, use whatever elements are present.
+  // eg. 1. frontPiece([1, 2, 3]) → [1, 2] || 2. frontPiece([1, 2]) → [1, 2] || 3. frontPiece([1]) → [1]
+  public int[] frontPiece(int[] nums) {
+    if(nums.length<=1){
+      return nums;
+    }
+    return new int[]{nums[0], nums[1]};
+  }
+
+  // unlucky1 -> We'll say that a 1 immediately followed by a 3 in an array is an "unlucky" 1. Return true if the given array contains an unlucky 1 in the first 2 or last 2 positions in the array.
+  // eg. 1. unlucky1([1, 3, 4, 5]) → true || 2. unlucky1([2, 1, 3, 4, 5]) → true || 3. unlucky1([1, 1, 1]) → false
+  public boolean unlucky1(int[] nums) {
+    if(nums.length>=2){
+    for(int i = 0; i<nums.length; i++){
+      if(i<=1 || i==nums.length-2){
+        if(nums[i]==1 && nums[i+1]==3){
+          return true;
+         }
+        }
+      }
+    }
+    return false;
+  }
+
+  // Given 2 int arrays, a and b, return a new array length 2 containing, as much as will fit, the elements from a followed by the elements from b. The arrays may be any length, including 0, but there will be 2 or more elements available between the 2 arrays.
+  // eg. 1. make2([4, 5], [1, 2, 3]) → [4, 5] || 2. make2([4], [1, 2, 3]) → [4, 1] || 3. make2([], [1, 2]) → [1, 2]
+  public int[] make2(int[] a, int[] b) {
+    if(a.length==0){
+      return new int[]{b[0], b[1]};
+    }
+    else if(a.length==1){
+      return new int[]{a[0], b[0]};
+    }
+    else{
+      return new int[]{a[0], a[1]};
+    }
+  }
+
+  // front11 -> Given 2 int arrays, a and b, of any length, return a new array with the first element of each array. If either array is length 0, ignore that array.
+  // eg. 1. front11([1, 2, 3], [7, 9, 8]) → [1, 7] || 2. front11([1], [2]) → [1, 2] || 3. front11([1, 7], []) → [1]
+  public int[] front11(int[] a, int[] b) {
+    if(a.length==0 && b.length==0){
+      return new int[]{};
+    }
+    if(a.length==0 && b.length!=0){
+      return new int[]{b[0]};
+    }
+    if(a.length!=0 && b.length==0){
+      return new int[]{a[0]};
+    }
+    else{
+      return new int[]{a[0], b[0]};
+    }
+  }
+
 } // class closing
