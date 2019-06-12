@@ -1,5 +1,5 @@
 /*
- * Name: Array-1.java
+ * Name: Warumup-2.java
  * @autor: Daniela Kepper
  * Date: 07.06.2019
  * Description: this java class provides my solutions for the Warmup-2 exercises of Coding Bat: https://codingbat.com/java/Warmup-2
@@ -226,13 +226,13 @@
   // noTriples -> Given an array of ints, we'll say that a triple is a value appearing 3 times in a row in the array. Return true if the array does not contain any triples.
   // eg. 1. noTriples([1, 1, 2, 2, 1]) → true || 2. noTriples([1, 1, 2, 2, 2, 1]) → false || 3. noTriples([1, 1, 1, 2, 2, 2, 1]) → false
   public boolean noTriples(int[] nums) {
-  for(int i = 0; i<nums.length-2; i++){
-    if(nums[i]==nums[i+1] && nums[i]==nums[i+2]){
-      return false;
+    for(int i = 0; i<nums.length-2; i++){
+      if(nums[i]==nums[i+1] && nums[i]==nums[i+2]){
+        return false;
+      }
     }
+    return true;
   }
-  return true;
-}
 
 // has271 -> Given an array of ints, return true if it contains a 2, 7, 1 pattern: a value, followed by the value plus 5, followed by the value minus 1. Additionally the 271 counts even if the "1" differs by 2 or less from the correct value.
 // eg. 1. has271([1, 2, 7, 1]) → true || 2. has271([1, 2, 8, 1]) → false || 3. has271([2, 7, 1]) → true
