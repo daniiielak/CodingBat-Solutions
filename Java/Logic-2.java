@@ -106,7 +106,61 @@
     return (Math.abs(b-a) <= 1 && Math.abs(c-b) >= 2 && Math.abs(c-a) >= 2  || Math.abs(c-a) <= 1 && Math.abs(b-c) >= 2 && Math.abs(b-a) >= 2);
   }
 
+  // blackjack -> Given 2 int values greater than 0, return whichever value is nearest to 21 without going over. Return 0 if they both go over.
+  // eg. 1. blackjack(19, 21) → 21 || 2. blackjack(21, 19) → 21 || 3. blackjack(19, 22) → 19
+  public int blackjack(int a, int b) {
+    if(a>21 && b>21){
+      return 0;
+    }
+    else if(a>21 || b>21){
+      return (a>21) ? b : a;
+    }
+    else{
+      return(a<b) ? b : a;
+    }
+  }
 
+  // evenlySpaced -> Given three ints, a b c, one of them is small, one is medium and one is large. Return true if the three values are evenly spaced, so the difference between small and medium is the same as the difference between medium and large
+  // eg. 1. evenlySpaced(2, 4, 6) → true || 2. evenlySpaced(4, 6, 2) → true || 3. evenlySpaced(4, 6, 3) → false
+  public boolean evenlySpaced(int a, int b, int c) {
+    int currentLarge = Math.max(a, b);
+    int large = (currentLarge>=Math.max(currentLarge, c)) ? currentLarge : c;
+    int currentMin = Math.min(a, b);
+    int small = (currentMin<=Math.min(currentMin, c)) ? currentMin : c;
+    int medium;
+    if(a!=large && a!= small){
+      medium = a;
+    }
+    else if(b!=large && b!=small){
+      medium = b;
+    }
+    else{
+      medium = c;
+    }
+    return ((medium-small) == (large-medium));
+  }
+
+  // makeChocolate -> We want make a package of goal kilos of chocolate. We have small bars (1 kilo each) and big bars (5 kilos each). Return the number of small bars to use, assuming we always use big bars before small bars. Return -1 if it can't be done.
+  // eg. 1. makeChocolate(4, 1, 9) → 4 || 2. makeChocolate(4, 1, 10) → -1 || 3. makeChocolate(4, 1, 7) → 2
+  public int makeChocolate(int small, int big, int goal) {
+    if((small*1 + big*5)>=goal){
+      if((big*5)>goal){
+        int restNeeded = goal%5;
+        if(restNeeded<=small){
+          return restNeeded;
+        }
+        return -1;
+      }
+      else{
+        int restNeeded = goal - (big*5);
+        if(restNeeded<=small){
+          return restNeeded;
+        }
+        return -1;
+      }
+    }
+    return -1;
+  }
 
    // DNC - class closing
  }
