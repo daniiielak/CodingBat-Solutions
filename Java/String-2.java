@@ -5,7 +5,7 @@
  * Description: this java class provides my solutions for the Java String-1 exercises of Coding Bat: http://codingbat.com/java/String-2
  */
 
-public class String-1 {
+public class String-2 {
 
   // doubleChar -> Given a string, return a string where for every char in the original, there are two chars.
   // eg. 1. doubleChar("The") → "TThhee" || 2. doubleChar("AAbb") → "AAAAbbbb" || 3. doubleChar("Hi-There") → "HHii--TThheerree"
@@ -229,6 +229,110 @@ public class String-1 {
     return "";
   }
 
+  // sameStarChar -> Returns true if for every '*' (star) in the string, if there are chars both immediately before and after the star, they are the same.
+  // eg. 1. sameStarChar("xy*yzz") → true || 2. sameStarChar("xy*zzz") → false || 3. sameStarChar("*xa*az") → true
+  public boolean sameStarChar(String str) {
+    boolean isThere = true;
+    if(str.length()>2){
+      for (int i = 0; i<str.length(); i++){
+        if(str.charAt(i)=='*' && i!=0 && i!=str.length()-1){
+          isThere = (str.charAt(i-1)==str.charAt(i+1));
+        }
+      }
+    }
+    return isThere;
+  }
+
+  // oneTwo -> Given a string, compute a new string by moving the first char to come after the next two chars, so "abc" yields "bca". Repeat this process for each subsequent group of 3 chars, so "abcdef" yields "bcaefd". Ignore any group of fewer than 3 chars at the end.
+  // eg. 1. oneTwo("abc") → "bca" || 2. oneTwo("tca") → "cat" || 3. oneTwo("tcagdo") → "catdog"
+  public String oneTwo(String str) {
+    StringBuffer newWord = new StringBuffer();
+    while(str.length()>=3){
+      newWord.append(str.substring(1,3));
+      newWord.append(str.charAt(0));
+      str = str.substring(3);
+    }
+    return newWord.toString();
+  }
+
+  // zipZap -> Look for patterns like "zip" and "zap" in the string -- length-3, starting with 'z' and ending with 'p'. Return a string where for all such words, the middle letter is gone, so "zipXzap" yields "zpXzp".
+  // eg. 1. zipZap("zipXzap") → "zpXzp" || 2. zipZap("zopzop") → "zpzp" || 3. zipZap("zzzopzop") → "zzzpzp"
+  public String zipZap(String str) {
+    StringBuffer newWord = new StringBuffer();
+    if(str.length()>=3){
+      for(int i = 1; i<str.length()-1; i++){
+        if(str.charAt(i-1)!='z' || str.charAt(i+1)!='p'){
+          newWord.append(str.charAt(i));
+        }
+      }
+      return str.charAt(0) + newWord.toString() + str.charAt(str.length()-1);
+    }
+    return str;
+  }
+
+  // starOut -> Return a version of the given string, where for every star (*) in the string the star and the chars immediately to its left and right are gone. So "ab*cd" yields "ad" and "ab**cd" also yields "ad".
+  // eg. 1. starOut("ab*cd") → "ad" || 2. starOut("ab**cd") → "ad" || 3. starOut("sm*eilly") → "silly"
+  public String starOut(String str) {
+    String newWord = "";
+    for(int i = 1; i<str.length(); i++){
+      if(i==str.length()-1 && str.charAt(str.length()-2)!='*' && str.charAt(str.length()-1)!='*'){
+          newWord = newWord + str.charAt(str.length()-1);
+        }
+      else if(str.charAt(i)!='*' && str.charAt(i-1)!='*' && str.charAt(i+1)!='*'){
+        newWord = newWord + str.charAt(i);
+      }
+    }
+    if(str.length()!=0 && str.charAt(0)!='*'){
+      if(str.length()<2){
+        newWord = str.charAt(0) + newWord;
+      }
+      else if(str.charAt(1)!='*'){
+          newWord = str.charAt(0) + newWord;
+        }
+    }
+    return newWord;
+  }
+
+  // plusOut -> Given a string and a non-empty word string, return a version of the original String where all chars have been replaced by pluses ("+"), except for appearances of the word string which are preserved unchanged.
+  // eg. 1. plusOut("12xy34", "xy") → "++xy++" || 2. plusOut("12xy34", "1") → "1+++++" || 3. plusOut("12xy34xyabcxy", "xy") → "++xy++xy+++xy"
+  public String plusOut(String str, String word){
+    StringBuffer newWord = new StringBuffer();
+    int index = 0;
+    while(index < str.length()){
+        if(index<= str.length() - word.length() && str.substring(index, index + word.length()).equals(word)) {
+            newWord.append(word);
+            index = index + word.length();
+        } else{
+            newWord.append("+");
+            index++;
+        }
+    }
+    return newWord.toString();
+  }
+
+  // wordEnds -> Given a string and a non-empty word string, return a string made of each char just before and just after every appearance of the word in the string. Ignore cases where there is no char before or after the word, and a char may be included twice if it is between two words.
+  // eg. 1. wordEnds("abcXY123XYijk", "XY") → "c13i" || 2. wordEnds("XY123XY", "XY") → "13" || 3. wordEnds("XY1XY", "XY") → "11"
+  public String wordEnds(String str, String word) {
+    StringBuffer newWord = new StringBuffer();
+    String checkWord = "";
+    int wl = word.length();
+    int sl = str.length();
+    if(sl>=wl){
+      for(int i = 0; i<=(sl-wl); i++){
+        checkWord = str.substring(i, i+wl);
+        if(checkWord.equals(word)){
+          if(i!=0){
+            newWord.append(str.charAt(i-1));
+          }
+          if(i<(sl-wl)){
+          newWord.append(str.charAt(i+wl));
+          }
+        }
+      }
+      return newWord.toString();
+    }
+    return "";
+  }
 
   // DNC - class closing tag
 }
