@@ -119,6 +119,101 @@ public class String-3 {
     return sum;
   }
 
+  // sameEnds -> Given a string, return the longest substring that appears at both the beginning and end of the string without overlapping. For example, sameEnds("abXab") is "ab".
+  // eg. 1. sameEnds("abXYab") → "ab" || 2. sameEnds("xx") → "x" || 3. sameEnds("xxx") → "x"
+  public String sameEnds(String string) {
+    if(string.length()>1){
+      int front = string.length()/2;
+      int back;
+      if(string.length()%2==0){
+        back=front;
+      }
+      else{
+        back=front+1;
+      }
+      for(int i = front; i>=1; i--){
+        if(string.substring(0, i).equals(string.substring(back))){
+          return string.substring(back);
+        }
+        else{
+          back++;
+        }
+      }
+    }
+    return "";
+  }
+
+  // mirrorEnds -> Given a string, look for a mirror image (backwards) string at both the beginning and end of the given string. In other words, zero or more characters at the very begining of the given string, and at the very end of the string in reverse order (possibly overlapping). For example, the string "abXYZba" has the mirror end "ab".
+  // eg. 1. mirrorEnds("abXYZba") → "ab" || 2. mirrorEnds("abca") → "a" || 3. mirrorEnds("aba") → "aba"
+  public String mirrorEnds(String string) {
+    String newWord = "";
+    String comparison = "";
+    int end = string.length()-1;
+    for(int i = 0; i<string.length(); i++){
+     comparison = comparison + string.charAt(end);
+     if(string.substring(0, i+1).equals(comparison)){
+       newWord = comparison;
+       end--;
+     }
+     else{
+       return newWord;
+     }
+   }
+   return newWord;
+  }
+
+  // maxBlock -> Given a string, return the length of the largest "block" in the string. A block is a run of adjacent chars that are the same.
+  // eg. 1. maxBlock("hoopla") → 2 || 2. maxBlock("abbCCCddBBBxx") → 3 || 3. maxBlock("") → 0
+  public int maxBlock(String str) {
+    if(str.length()>0){
+      int count = 1;
+      int max = 1;
+      for(int i = 1; i<str.length(); i++){
+        if(str.charAt(i)==str.charAt(i-1)){
+          count++;
+        }
+        else{
+          if(count>max){
+            max = count;
+          }
+          count = 1;
+        }
+      }
+      if(count>max){
+        max=count;
+      }
+      return max;
+    }
+    return 0;
+  }
+
+  // sumNumbers -> Given a string, return the sum of the numbers appearing in the string, ignoring all other characters. A number is a series of 1 or more digit chars in a row. (Note: Character.isDigit(char) tests if a char is one of the chars '0', '1', .. '9'. Integer.parseInt(string) converts a string to an int.)
+  // eg. 1. sumNumbers("abc123xyz") → 123 || 2. sumNumbers("aa11b33") → 44 || 3. sumNumbers("7 11") → 18
+  public int sumNumbers(String str) {
+    int sum = 0;
+    String storeDigits = "";
+    if(str.length()>0){
+      for(int i = 0; i<str.length(); i++){
+        if(Character.isDigit(str.charAt(i))){
+          storeDigits = storeDigits + str.charAt(i);
+        }
+        else{
+          if(storeDigits.length()>0){
+            sum = sum + Integer.parseInt(storeDigits);
+          }
+          storeDigits = "";
+        }
+      }
+    }
+    if(storeDigits.length()>0){
+      sum = sum + Integer.parseInt(storeDigits);
+    }
+    return sum;
+  }
+
+  // notReplace -> Given a string, return a string where every appearance of the lowercase word "is" has been replaced with "is not". The word "is" should not be immediately preceeded or followed by a letter -- so for example the "is" in "this" does not count. (Note: Character.isLetter(char) tests if a char is a letter.)
+  // eg. 1. notReplace("is test") → "is not test" || 2. notReplace("is-is") → "is not-is not" || 3. notReplace("This is right") → "This is not right"
+  
 
   // DNC - class closing
 }
